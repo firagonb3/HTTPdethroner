@@ -1,0 +1,51 @@
+@import '../libs/normalize/normalize.css';
+
+:root {
+    color-scheme: light dark;
+}
+
+#app {
+    border: 1px black solid;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    overflow: hidden;
+
+    min-width: 400px;
+    min-height: 400px;
+}
+
+.save {
+    position: absolute;
+    bottom: 1.5em;
+    right: .4em;
+    margin-right: 1em;
+    padding: 2px 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.conten {
+    height: 100%;
+    padding: .5em;
+}
+
+@media (prefers-color-scheme: dark) {
+    #app {
+        background: #313338;
+        color: white;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #app {
+        background: #ddd;
+        color: black;
+    }
+}
+
+
+.none {
+    display: none;
+}

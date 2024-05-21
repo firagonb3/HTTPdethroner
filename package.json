@@ -1,0 +1,23 @@
+{
+  "name": "destronando-apache",
+  "version": "0.0.1",
+  "description": "server HTTP con tecnologia electron y express",
+  "main": "./src/main.cjs",
+  "scripts": {
+    "start": "electron . --inspect",
+    "web": "vite",
+    "dev": "concurrently \"npm run web\" \"npm run start\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sr.Firagon",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "8.2.2",
+    "electron": "29.2.0",
+    "vite": "5.2.8"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "vhost": "3.0.2"
+  }
+}
