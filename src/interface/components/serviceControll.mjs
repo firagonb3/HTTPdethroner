@@ -12,6 +12,11 @@ export function serviceControll() {
         await window.HTTPserver.httpStop()
     })
 
+    $('#httpRestart').onReactiveEvent('click', async () => {
+        const port = $('#port').value() || 3000
+        await window.HTTPserver.httpRestart(port)
+    })
+
     return /*html*/`
         <section class="conten" id="serviceControll">
             <serviceControll-Controll>

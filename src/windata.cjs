@@ -8,10 +8,17 @@ const windata = {
         loadURL: "http://localhost:5173/",
         loadFile: 'src/public/ui/index.html',
 
-        frame: true,
-        transparent: false,
-        maximizable: true,
-        resizable: true
+        // frame: true,
+        // transparent: false,
+        // maximizable: true,
+        // resizable: true
+
+        frame: false,
+        transparent: true,
+        maximizable: false,
+        resizable: false
+
+
     },
     "popUp": {
         id: "popUp",

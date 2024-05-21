@@ -7,10 +7,11 @@ contextBridge.exposeInMainWorld('darkMode', {
 
 contextBridge.exposeInMainWorld('HTTPserver', {
     httpStart: arg1 => ipcRenderer.invoke('http:start', arg1),
+    httpRestart: arg1 => ipcRenderer.invoke('http:restart', arg1),
     httpStop: () => ipcRenderer.invoke('http:stop')
 })
 
 contextBridge.exposeInMainWorld('RemoteControl', {
     close: arg1 => ipcRenderer.invoke('remote:close', arg1),
-    minimizer: arg2 => ipcRenderer.invoke('remote:minimizer', arg2),
+    minimizer: arg1 => ipcRenderer.invoke('remote:minimizer', arg1),
 })
