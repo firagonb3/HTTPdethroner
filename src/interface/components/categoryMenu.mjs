@@ -1,21 +1,21 @@
-export function categoryMenu(menuOptions) {
-
+export function categoryMenu(menuOptions, checked = 0) {
     const menuItems = menuOptions.map((option, index) => /*html*/`
-        <input type="radio" id="opcion${index + 1}" name="opcion" ${index === 0 ? 'checked' : ''}>
+        <input type="radio" id="opcion${index + 1}" name="opcion" ${index === checked ? 'checked' : ''}>
         <label for="opcion${index + 1}">${option.label}</label>
     `).join('');
 
     const sectionContent = menuOptions.map(option => option.functionality()).join('');
 
     return /*html*/`
-        <div class="menu">
+        <categoryMenu-Menu class="menu">
             ${menuItems}
             ${sectionContent}
-        </div>
+        </categoryMenu-Menu>
 
         <style>
 
-            .menu {
+            categoryMenu-Menu {
+                user-select: none;
                 position: relative;
                 display: inline-table;
                 top: 0.5em;
@@ -23,11 +23,11 @@ export function categoryMenu(menuOptions) {
                 width: 100vw;
             }
 
-            .menu input[type="radio"] {
+            categoryMenu-Menu input[type="radio"] {
                 display: none;
             }
             
-            .menu label {
+            categoryMenu-Menu label {
                 padding: 5px 10px;
                 border: 1px solid #ccc;
                 border-bottom: none;
@@ -36,17 +36,17 @@ export function categoryMenu(menuOptions) {
                 z-index: 1;
             }
             
-            .menu label:hover {
+            categoryMenu-Menu label:hover {
                 background-color: #e0e0e0;
             }
             
-            .menu input[type="radio"]:checked + label {
+            categoryMenu-Menu input[type="radio"]:checked + label {
                 border-radius: 10px 0 0 0;
                 background-color: #007bff;
                 
             }
             
-            .menu input[type="radio"]:checked + label::before {
+            categoryMenu-Menu input[type="radio"]:checked + label::before {
                 content: '';
                 position: absolute;
                 bottom: -1px;
@@ -56,7 +56,7 @@ export function categoryMenu(menuOptions) {
                 background-color: #007bff;
             }
 
-            .menu section {
+            categoryMenu-Menu section {
                 display: none;
             }
 

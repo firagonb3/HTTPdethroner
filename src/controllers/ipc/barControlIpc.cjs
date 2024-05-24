@@ -5,7 +5,9 @@ function barControlIpc(win = null) {
     ipcMain.handle('remote:close', (e, id) => {
         const windowToClose = win.find(win => win.id === id);
         console.log(win[0].id, id);
+        console.log(windowToClose)
         if (windowToClose) {
+            console.log(win[0].id, id);
             windowToClose.close();
         }
     });

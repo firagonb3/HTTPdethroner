@@ -1,8 +1,8 @@
-import { $ } from "../../../utils/ECMAScript/index.mjs"
+import { $, globalParams } from "../../../utils/ECMAScript/index.mjs"
 
 export function windows(titel, content) {
 
-    const id = 1
+    const id = Number(globalParams('id'))
 
     $('#close').onReactiveEvent('click', async () => {
         console.log('Window ID:', id);
@@ -28,6 +28,7 @@ export function windows(titel, content) {
         </main>
         <style>
             .titelbar {
+                user-select: none;
                 -webkit-app-region: drag;
                 background-color: #1E1F22;
                 display: flex;

@@ -68,11 +68,12 @@ export function serviceControll() {
             }
 
             serviceControll-Box {
+                user-select: text;
                 display: block;
                 width: 100%;
                 height: 10rem;
                 border: 2px solid black;
-                border-radius: 1em;
+                border-radius: 5px;
                 padding: .5em;
                 overflow: hidden;
                 box-sizing: border-box;

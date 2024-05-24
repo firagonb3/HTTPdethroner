@@ -23,6 +23,9 @@ SHASUMS256.txt
 compile_commands.json
 .envrc
 pruebas/
+img
+
+!src/img
 
 # npm package
 /npm/dist

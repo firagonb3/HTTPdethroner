@@ -9,16 +9,6 @@ export function _utilsDom(element) {
         setLocalStorageValue: (key) => window.localStorage.setItem(key, self.e.value),
         getLocalStorageValue: (key) => self.e.value = window.localStorage.getItem(key) || "",
         addHTMLContent: (content) => self.e.innerHTML = content,
-        onReactiveClick: (func) => {
-            const observer = new MutationObserver((mutationsList, observer) => {
-                const elm = document.querySelector(element);
-                if (elm) {
-                    observer.disconnect();
-                    elm.onclick = func;
-                }
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-        },
         onReactiveEvent: (type, func) => {
             const observer = new MutationObserver((mutationsList, observer) => {
                 const elm = document.querySelector(element);
@@ -31,4 +21,5 @@ export function _utilsDom(element) {
         },
     }
     return self;
+    
 }

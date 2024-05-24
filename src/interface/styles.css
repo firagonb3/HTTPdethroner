@@ -8,22 +8,12 @@
     border: 1px black solid;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     overflow: hidden;
 
     min-width: 400px;
     min-height: 400px;
-}
-
-.save {
-    position: absolute;
-    bottom: 1.5em;
-    right: .4em;
-    margin-right: 1em;
-    padding: 2px 8px;
-    font-size: 16px;
-    cursor: pointer;
 }
 
 .conten {

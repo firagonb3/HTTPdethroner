@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { BrowserWindow } = require('electron/main');
 const isDev = require('../../utils/CommonJS/isDev.cjs');
 const path = require('node:path');
@@ -60,11 +61,20 @@ const window = {
             },
         });
 
+        
+
         if (isDev && config?.loadURL) {
-            win.loadURL(config.loadURL);
+            const { PORT_IMG, HOST_IMG, PORT_VITE, HOST_VITE } = process.env;
+            const GlobalIMG = `http://${HOST_IMG}:${PORT_IMG}`;
+            const loadURL = `http://${HOST_VITE}:${PORT_VITE}`;
+            win.loadURL(`${loadURL}?id=${win.id}&GlobalIMG=${GlobalIMG}`);
         } else {
-            win.loadFile(config.loadFile);
+            const GlobalIMG = path.join(__dirname, "../../img")
+            const filePath = path.join(__dirname, '../../interface/' + config.loadFile);
+            win.loadURL(`file://${filePath}?id=${win.id}&GlobalIMG=${encodeURIComponent(GlobalIMG)}`);
         }
+
+        
 
         if (config?.devtools ?? false) {
             win.webContents.openDevTools();
