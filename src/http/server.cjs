@@ -11,31 +11,33 @@ defaultApp.get('/', (req, res) => {
 })
 
 function startServer(port) {
-    if (!isRunning) {
-        vhostServer(app, [
-            { hostname: 'host1.int', text: 'vhost 1' },
-            { hostname: 'host2.int', text: 'vhost 2' }
-        ])
-        app.use(defaultApp)
-        server = app.listen(port, () => {
-            console.log(`Listening on http://localhost:${port}`);
-            isRunning = true;
-        })
-    } else {
+    if (isRunning) {
         console.log("The server is already running")
+        return;
     }
+
+    vhostServer(app, [
+        { hostname: 'host1.int', text: 'vhost 1' },
+        { hostname: 'host2.int', text: 'vhost 2' }
+    ])
+    app.use(defaultApp)
+    server = app.listen(port, () => {
+        console.log(`Listening on http://localhost:${port}`);
+        isRunning = true;
+    })
 
 }
 
 function stopServer() {
-    if (isRunning) {
-        server.close(() => {
-            console.log("The server has been stopped");
-            isRunning = false;
-        });
-    } else {
+    if (!isRunning) {
         console.log("There is no server to be closed.")
+        return;
     }
+
+    server.close(() => {
+        console.log("The server has been stopped");
+        isRunning = false;
+    });
 }
 
 

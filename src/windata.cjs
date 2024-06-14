@@ -16,7 +16,8 @@ const windata = {
         // frame: false,
         // transparent: true,
         // maximizable: false,
-        // resizable: false
+        // resizable: false,
+        // devtools: false
 
 
     },

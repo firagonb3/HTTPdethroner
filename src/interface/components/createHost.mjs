@@ -9,7 +9,6 @@ export function createHost() {
                 <createHost-Cell>
                     <p>
                         <img src="${imgPaht}/add.svg" alt="Add Icon" />
-                        New Host 
                     </p>
                 </createHost-Cell>
                 <createHost-Cell>
@@ -29,8 +28,17 @@ export function createHost() {
                 flex-direction: column;
             }
 
+            createHost-Cell img {
+                vertical-align: middle;
+            }
+
             createHost-Cell p{
+                margin: .5em 0 .5em 0;
                 text-align: center;
+            }
+
+            createHost-Cell:hover {
+                background-color: grey;
             }
 
         </style>
