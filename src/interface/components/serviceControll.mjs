@@ -17,6 +17,15 @@ export function serviceControll() {
         await window.HTTPserver.httpRestart(port)
     })
 
+    window.logMessage.onLogMessage((message) => {
+        const logContainer = $('#log-container').e
+        console.log(message)
+        const { type, args } = message;
+        const logEntry = document.createElement('p');
+        logEntry.textContent = `[${type.toUpperCase()}] ${args.join(' ')}`;
+        logContainer.appendChild(logEntry);
+    });
+
     return /*html*/`
         <section class="conten" id="serviceControll">
             <serviceControll-Controll>
@@ -30,7 +39,7 @@ export function serviceControll() {
                 <p>
                     log:
                 </p>
-                <serviceControll-Box>
+                <serviceControll-Box id="log-container">
                     <p>adwdawdawd</p>
                 </serviceControll-Box>
             </serviceControll-Log>

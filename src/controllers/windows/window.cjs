@@ -57,6 +57,7 @@ const window = {
             resizable: config?.resizable !== undefined ? config.resizable : isDev,
             webPreferences: {
                 nodeIntegration: true,
+                enableRemoteModule: true,
                 preload: path.join(__dirname, 'preload.cjs'),
             },
         });

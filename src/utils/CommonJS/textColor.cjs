@@ -24,7 +24,7 @@ const colors = {
     bgWhite: "bgWhite"
 };
 
-function printColor(text = "", color = 0) {
+function textColor(color = 0, text = "") {
     const colors = {
         reset: "\x1b[0m",
         bright: "\x1b[1m",
@@ -52,16 +52,15 @@ function printColor(text = "", color = 0) {
     };
 
     if (text === "") {
-        console.log(colors.fgRed + "arguments invalids" + colors.reset);
-        return;
+        return colors.fgRed + "arguments invalids" + colors.reset;
     }
 
     if (colors[color]) {
-        console.log(colors[color] + text + colors.reset);
+        return colors[color] + text + colors.reset;
     } else {
-        console.log(text);
+        return text;
     }
 
 }
 
-module.exports = { printColor, colors };
+module.exports = { textColor, colors };

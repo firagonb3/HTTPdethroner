@@ -26,6 +26,10 @@ pruebas/
 img
 
 !src/img
+logs/
+
+
+build/
 
 # npm package
 /npm/dist

@@ -15,3 +15,7 @@ contextBridge.exposeInMainWorld('RemoteControl', {
     close: arg1 => ipcRenderer.invoke('remote:close', arg1),
     minimizer: arg1 => ipcRenderer.invoke('remote:minimizer', arg1),
 })
+
+contextBridge.exposeInMainWorld('logMessage', {
+    onLogMessage: (callback) => ipcRenderer.on('logMessage', (event, ...args) => callback(...args)),
+});

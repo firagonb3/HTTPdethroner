@@ -1,5 +1,7 @@
 const express = require('express')
 const vhostServer = require('./vhostServer.cjs')
+const { logToRenderer, typeLog } = require('../utils/CommonJS/logHandler.cjs')
+
 const app = express()
 const defaultApp = express()
 
@@ -12,7 +14,7 @@ defaultApp.get('/', (req, res) => {
 
 function startServer(port) {
     if (isRunning) {
-        console.log("The server is already running")
+        logToRenderer(typeLog.WARNING, "The server is already running")
         return;
     }
 
