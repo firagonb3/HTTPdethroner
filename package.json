@@ -10,7 +10,8 @@
     "start": "electron . --inspect",
     "web": "vite",
     "dev": "concurrently \"npm run img\" \"npm run web\" \"npm run start\"",
-    "buildWin": "node build-tools/buildElectronApp.cjs"
+    "buildWin": "node build-tools/buildElectronApp.cjs --win",
+    "buildLinux": "node build-tools/buildElectronApp.cjs --linux"
   },
   "devDependencies": {
     "asar": "3.2.0",
@@ -18,6 +19,7 @@
     "electron": "29.2.0",
     "electron-packager": "17.1.2",
     "fs-extra": "11.2.0",
+    "minimist": "1.2.8",
     "vite": "5.2.8"
   },
   "dependencies": {

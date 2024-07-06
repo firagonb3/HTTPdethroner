@@ -1,13 +1,31 @@
 const { remove, ensureDir, copy, pathExists } = require('fs-extra');
+const minimist = require('minimist');
 const packager = require('electron-packager');
 const { createPackage } = require('asar');
 const { join } = require('path');
-
 const { installDependencies } = require('./installDependencies.cjs');
+
+const validOS = ['win', 'linux'];
+const args = minimist(process.argv.slice(2));
+const providedOS = validOS.filter(os => args[os]);
+
+if (Object.keys(args).length === 1 && args._.length === 0) {
+  throw new Error("No arguments specified");
+}
+
+if (providedOS.length > 1) {
+  throw new Error("You specified more than one operating system. Use only one.");
+}
+
+let SYSOS;
+if (args.win) {
+  SYSOS = 'win32'; 
+} else if (args.linux) {
+  SYSOS = 'linux';
+}
 
 const projectRoot = join(__dirname, '..');
 const { name, version, author } = require(join(projectRoot, 'package.json'));
-
 const outDir = join(__dirname, 'build');
 const outDirSrc = join(outDir, 'src');
 const srcDir = join(__dirname, '..', 'src');
@@ -26,7 +44,7 @@ async function buildElectronApp() {
 
     if (!packageJsonExiste || !nodeModulesExiste) {
       await installDependencies();
-      await sleep(2000);
+      await sleep(5000);
     }
 
     // Limpiar y asegurar el directorio de salida
@@ -45,7 +63,7 @@ async function buildElectronApp() {
       dir: outDir,
       out: join(__dirname, '..', 'dist'),
       overwrite: true,
-      platform: 'win32',
+      platform: SYSOS,
       arch: 'x64',
       prune: true,
       name: name,
