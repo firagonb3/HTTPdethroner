@@ -1,12 +1,14 @@
 const { app, BrowserWindow } = require('electron/main');
 const IPCmain = require('./controllers/ipc/IPCmain.cjs');
-const { initializeLogHandler } = require('./utils/CommonJS/logHandler.cjs');
+const { logHandler } = require('./utils/CommonJS/logHandler.cjs');
+const formatISODateToReadable = require('./utils/CommonJS/formatISODateToReadable.cjs')
 const window = require('./controllers/windows/window.cjs');
 const windata = require('./windata.cjs');
 
 const { FileDirectoryManager } = require('./utils/CommonJS/FileDirectoryManager.cjs');
 
 app.whenReady().then(() => {
+    const date = formatISODateToReadable(new Date().toISOString())
     const logPath = 'logs';
     const logFile = 'app.log';
 
@@ -17,10 +19,10 @@ app.whenReady().then(() => {
     IPCmain(win);
     
     FileDirectoryManager.createDirectory(logPath);
-    FileDirectoryManager.writeFile("*********************", logPath, logFile);
-    FileDirectoryManager.writeFile("Execute App", logPath, logFile);
-    FileDirectoryManager.writeFile("*********************", logPath, logFile);
-    initializeLogHandler(win[0], logPath, logFile);
+    FileDirectoryManager.writeFile(logPath, logFile, date, " - *********************");
+    FileDirectoryManager.writeFile(logPath, logFile, date, " - Execute App");
+    FileDirectoryManager.writeFile(logPath, logFile, date, " - *********************");
+    logHandler.init(win[0], logPath, logFile);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {

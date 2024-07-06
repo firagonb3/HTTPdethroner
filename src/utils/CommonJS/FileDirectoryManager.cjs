@@ -20,10 +20,9 @@ const FileDirectoryManager = {
         fs.rmSync(fullPath, { recursive: true, force: true });
         return { text: `Directory '${fullPath}' deleted successfully.` };
     },
-    writeFile: (message, dirPath, file) => {
+    writeFile: (dirPath, file, ...message) => {
         const filePath = path.join(appFile, dirPath, file);
-        const logMessage = `${new Date().toISOString()} - ${message}\n`;
-        fs.appendFileSync(filePath, logMessage, { encoding: 'utf8' });
+        fs.appendFileSync(filePath, `${message.join('')}\n`, { encoding: 'utf8' });
         return { text: `Message written to '${filePath}' successfully.` };
     },
     removeFile: (filePath) => {

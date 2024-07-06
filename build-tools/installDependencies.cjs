@@ -23,7 +23,7 @@ async function installDependencies() {
         }
         
         console.log('Dependencies installed successfully:');
-        console.log(dependencies)
+        console.log(dependencies);
         console.log('');
     });
 }

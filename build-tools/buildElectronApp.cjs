@@ -62,9 +62,6 @@ async function buildElectronApp() {
     // Eliminar la carpeta app descomprimida después de crear app.asar
     await remove(join(resourcesPath, 'app'));
 
-    // Limpiar el directorio temporal
-    await remove(outDir);
-
     console.log('');
     console.log('******************************');
     console.log('Build completed successfully!');

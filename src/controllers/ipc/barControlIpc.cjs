@@ -1,4 +1,4 @@
-const { app, ipcMain } = require('electron/main');
+const { ipcMain } = require('electron/main');
 
 
 function barControlIpc(win = null) {
