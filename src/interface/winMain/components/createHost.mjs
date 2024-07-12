@@ -1,4 +1,4 @@
-import { globalParams } from "../../utils/ECMAScript/index.mjs";
+import { globalParams } from "../../../utils/ECMAScript/index.mjs";
 
 export function createHost() {
     const imgPaht = globalParams('GlobalIMG')

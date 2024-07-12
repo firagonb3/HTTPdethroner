@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron/main');
 const IPCmain = require('./controllers/ipc/IPCmain.cjs');
-const { logHandler } = require('./utils/CommonJS/logHandler.cjs');
+const { logHandler } = require('./controllers/logManagement/logHandler.cjs');
 const formatISODateToReadable = require('./utils/CommonJS/formatISODateToReadable.cjs')
 const window = require('./controllers/windows/window.cjs');
 const windata = require('./windata.cjs');
@@ -13,7 +13,7 @@ app.whenReady().then(() => {
     const logFile = 'app.log';
 
     const win = [
-        window.init(windata.winMain)
+        window.init(windata.winMain),
     ];
 
     IPCmain(win);

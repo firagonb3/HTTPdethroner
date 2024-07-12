@@ -1,5 +1,3 @@
-// import { $ } from "../../utils/index.js"
-
 export function vhost(save, objectJson) {
 
     return /*html*/`

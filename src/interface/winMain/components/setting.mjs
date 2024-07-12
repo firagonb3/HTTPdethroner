@@ -1,4 +1,4 @@
-import { $ } from "../../utils/ECMAScript/index.mjs"
+import { $ } from "../../../utils/ECMAScript/index.mjs"
 
 export function Setting(save, objectJson) {
 

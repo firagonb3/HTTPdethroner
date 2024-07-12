@@ -57,27 +57,22 @@ const window = {
             resizable: config?.resizable !== undefined ? config.resizable : isDev,
             webPreferences: {
                 nodeIntegration: true,
-                enableRemoteModule: true,
                 preload: path.join(__dirname, 'preload.cjs'),
             },
         });
 
-        
-
         if (isDev && config?.loadURL) {
             const { PORT_IMG, HOST_IMG, PORT_VITE, HOST_VITE } = process.env;
             const GlobalIMG = `http://${HOST_IMG}:${PORT_IMG}`;
-            const loadURL = `http://${HOST_VITE}:${PORT_VITE}`;
+            const loadURL = `http://${HOST_VITE}:${PORT_VITE}/${config.loadFile}`;
             win.loadURL(`${loadURL}?id=${win.id}&GlobalIMG=${GlobalIMG}`);
         } else {
             const GlobalIMG = path.join(__dirname, "../../img")
-            const filePath = path.join(__dirname, '../../interface/' + config.loadFile);
+            const filePath = path.join(__dirname, '../../interface', config.loadFile);
             win.loadURL(`file://${filePath}?id=${win.id}&GlobalIMG=${encodeURIComponent(GlobalIMG)}`);
         }
 
-        
-
-        if (config?.devtools ?? false) {
+        if ((config?.devtools ?? false) && isDev) {
             win.webContents.openDevTools();
         }
 

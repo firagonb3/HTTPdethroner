@@ -3,7 +3,7 @@ import { Setting } from "../components/setting.mjs"
 import { vhost } from "../components/vhost.mjs";
 import { serviceControll } from "../components/serviceControll.mjs";
 
-import { save } from "../components/save.mjs";
+import { save } from "../../components/save.mjs";
 
 const objectJson = {};
 

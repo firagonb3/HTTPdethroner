@@ -1,8 +1,8 @@
-const { textColor, colors } = require('./textColor.cjs');
-const { FileDirectoryManager } = require('./FileDirectoryManager.cjs')
-const formatISODateToReadable = require('./formatISODateToReadable.cjs')
+const { textColor, colors } = require('../../utils/CommonJS/textColor.cjs');
+const { FileDirectoryManager } = require('../../utils/CommonJS/FileDirectoryManager.cjs')
+const formatISODateToReadable = require('../../utils/CommonJS/formatISODateToReadable.cjs')
 
-let mainWindow;
+let win = [];
 let logFile;
 let logPath;
 
@@ -22,23 +22,32 @@ function selectType(type) {
         case "INFO":
             return { textColor: textColor(colors.fgGreen, "INFO"), text: 'INFO' };
         default:
-            return { textColor: textColor(colors.fgWhite, "LOG"), text: 'LOG' };
+            return { textColor: type, text: type };
     }
 }
 
 const logHandler = {
     init: (window, Path, File) => {
-        mainWindow = window;
+        win.push(window);
         logFile = File
         logPath = Path
+    },
+    addWin: (window) => {
+        win.push(window);
+    },
+    removeWin: (window) => {
+        const i = win.indexOf(window);
+        win.splice(i, 1);
     },
     logToRenderer: (type, ...args) => {
         type = type.toUpperCase();
         const typeFormat = selectType(type);
 
-        if (mainWindow && mainWindow.webContents) {
-            mainWindow.webContents.send('logMessage', { type, args });
-        }
+        win.map((v, i) => {
+            if (v && v.webContents) {
+                v.webContents.send('logMessage', { type, args });
+            }
+        })
 
         const date = formatISODateToReadable(new Date().toISOString())
         const missig = ` - [${typeFormat.text}] ${args.join(' ')}`

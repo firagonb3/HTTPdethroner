@@ -1,6 +1,6 @@
 const express = require('express')
 const vhostServer = require('./vhostServer.cjs')
-const { logHandler, typeLog } = require('../utils/CommonJS/logHandler.cjs')
+const { logHandler, typeLog } = require('../controllers/logManagement/logHandler.cjs')
 
 const app = express()
 const defaultApp = express()
@@ -31,8 +31,6 @@ async function startServer(port) {
     } catch (error) {
         logHandler.logToRenderer(typeLog.ERROR, error);
     }
-    
-
 }
 
 async function stopServer() {

@@ -71,6 +71,8 @@ async function buildElectronApp() {
       author: author
     });
 
+    await remove(outDir);
+
     // Empaquetar en app.asar
     const appPath = appPaths[0];
     const resourcesPath = join(appPath, 'resources');

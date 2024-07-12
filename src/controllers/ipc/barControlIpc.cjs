@@ -1,13 +1,13 @@
 const { ipcMain } = require('electron/main');
+const { logHandler } = require('../logManagement/logHandler.cjs')
 
-
-function barControlIpc(win = null) {
+function barControlIpc(win) {
     ipcMain.handle('remote:close', (e, id) => {
         const windowToClose = win.find(win => win.id === id);
-        console.log(win[0].id, id);
-        console.log(windowToClose)
         if (windowToClose) {
-            console.log(win[0].id, id);
+            const i = win.indexOf(windowToClose);
+            logHandler.removeWin(windowToClose);
+            win.splice(i, 1);
             windowToClose.close();
         }
     });

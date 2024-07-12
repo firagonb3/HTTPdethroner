@@ -19,3 +19,7 @@ contextBridge.exposeInMainWorld('RemoteControl', {
 contextBridge.exposeInMainWorld('logMessage', {
     onLogMessage: (callback) => ipcRenderer.on('logMessage', (event, ...args) => callback(...args)),
 });
+
+contextBridge.exposeInMainWorld('newWindow', {
+    addWin: (arg1, arg2) => ipcRenderer.invoke('newWindow:add', arg1, arg2)
+});
