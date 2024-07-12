@@ -6,7 +6,14 @@ const windata = require('../../windata.cjs');
 function newWindowIpc(win) {
     ipcMain.handle('newWindow:add', (e, name, log = false) => {
         win.push(window.init(windata[name]));
-        if (log) logHandler.addWin(win[win.length - 1]);
+        const newWin = win[win.length - 1]
+        if (log) logHandler.addWin(newWin);
+        newWin.on('closed', () => {
+            console.log("cosa")
+            const i = win.indexOf(newWin);
+            if (log) logHandler.removeWin(newWin);
+            win.splice(i, 1);
+        });
     });
 }
 

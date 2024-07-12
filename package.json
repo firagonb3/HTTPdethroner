@@ -9,7 +9,7 @@
     "img": "node server.img.cjs",
     "start": "electron . --inspect",
     "web": "vite",
-    "dev": "concurrently \"npm run img\" \"npm run web\" \"npm run start\"",
+    "dev": "concurrently -k \"npm run img\" \"npm run web\" \"npm run start\"",
     "buildWin": "node build-tools/buildElectronApp.cjs --win",
     "buildLinux": "node build-tools/buildElectronApp.cjs --linux"
   },
