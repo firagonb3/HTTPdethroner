@@ -24,6 +24,10 @@ app.whenReady().then(() => {
     FileDirectoryManager.writeFile(logPath, logFile, date, " - *********************");
     logHandler.init(win[0], logPath, logFile);
 
+    win[0].on('closed', (e) => {
+        app.quit();
+    });
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
             window.init(windata.winMain)

@@ -63,9 +63,6 @@ export function windows(titel, content) {
                     }
                 }
             }
-
-            
-
         </style>
     `
 }
