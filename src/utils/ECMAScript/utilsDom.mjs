@@ -1,7 +1,7 @@
 export function _utilsDom(element) {
     const self = {
         e: element === document ? document : document.querySelector(element),
-        value: () => self.e.value,
+        value: (v = null) => v === null ? self.e.value : self.e.value = v,
         onReady: (func) => self.e.addEventListener('DOMContentLoaded', func),
         onClick: (func) => self.e.onclick = func,
         onEvent: (type, func) => self.e.addEventListener(type, func),

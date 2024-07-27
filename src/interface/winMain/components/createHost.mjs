@@ -18,15 +18,15 @@ export function createHost() {
 
     const createhost = dialog.create({
         id: 'createHost',
-        show: false,
+        show: true,
         elements: /* html */`
             <p>Este es un párrafo dentro del diálogo.</p>
             <input id="cosa" type="text" placeholder="Escribe aquí">
         `,
         buttons: {
             acceptButtonOnClick: () => {
-                // $('#cosa').value() = ""
                 console.log($('#cosa').value())
+                $('#cosa').value('')
                 dialog.hide()
             },
             cancelButtonOnClick: () => {
