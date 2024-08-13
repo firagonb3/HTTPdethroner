@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron/main');
+const { ipcMain } = require('electron');
 
 function barControlIpc(win) {
     ipcMain.handle('remote:close', (e, id) => {

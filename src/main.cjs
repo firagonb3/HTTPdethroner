@@ -7,6 +7,10 @@ const windata = require('./windata.cjs');
 
 const { FileDirectoryManager } = require('./utils/CommonJS/FileDirectoryManager.cjs');
 
+
+const CreateDB = require('./models/CreateDB.cjs')
+
+
 app.whenReady().then(() => {
     const date = formatISODateToReadable(new Date().toISOString())
     const logPath = 'logs';
@@ -23,6 +27,8 @@ app.whenReady().then(() => {
     FileDirectoryManager.writeFile(logPath, logFile, date, " - Execute App");
     FileDirectoryManager.writeFile(logPath, logFile, date, " - *********************");
     logHandler.init(win[0], logPath, logFile);
+    
+    CreateDB();
 
     win[0].on('closed', (e) => {
         app.quit();

@@ -23,3 +23,7 @@ contextBridge.exposeInMainWorld('logMessage', {
 contextBridge.exposeInMainWorld('newWindow', {
     addWin: (arg1, arg2) => ipcRenderer.invoke('newWindow:add', arg1, arg2)
 });
+
+contextBridge.exposeInMainWorld('openFileDialog', {
+    selectFileDialog: () => ipcRenderer.invoke('openFileDialog:selectFileWeb')
+});

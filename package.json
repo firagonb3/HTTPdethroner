@@ -25,6 +25,8 @@
   "dependencies": {
     "dotenv": "16.4.5",
     "express": "4.19.2",
+    "httpdethroner": "file:",
+    "sqlite3": "5.1.7",
     "vhost": "3.0.2"
   },
   "build": {

@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron/main');
+const { ipcMain } = require('electron');
 const { logHandler } = require('../logManagement/logHandler.cjs')
 const window = require('../windows/window.cjs');
 const windata = require('../../windata.cjs');

@@ -3,16 +3,6 @@ import { $ } from "../../../utils/ECMAScript/index.mjs"
 
 import { dialog } from "../../components/windows/dialog.mjs";
 
-
-
-
-// $('#addHost').onReactiveEvent('click', async () => {
-//     $('createHost-Container').appendChild('createHost-Cell', `dddd`)
-// })
-
-
-
-
 export function createHost() {
     const imgPaht = globalParams('GlobalIMG')
 
@@ -20,16 +10,46 @@ export function createHost() {
         id: 'createHost',
         show: true,
         elements: /* html */`
-            <p>Este es un párrafo dentro del diálogo.</p>
-            <input id="cosa" type="text" placeholder="Escribe aquí">
+            <form id="elemt-form">
+                <label>
+                    Port:
+                    <input id="Port" type="number"><br>
+                </label>
+                <br>
+                <label>
+                    Path:
+                    <input id="Path" type="text" placeholder="c:\\web\\index.html">
+                </label>
+
+                <button id="selectFile">
+                    search
+                </button>
+            </form>
+
+            <style>
+                #elemt-form {
+                    padding: 20px;
+                }
+            </style>
         `,
+        preload: () => {
+            $('#selectFile').onReactiveEvent('click', async e => {
+                e.preventDefault();
+                const Path = await window.openFileDialog.selectFileDialog();
+                $('#Path').value(Path);
+            })
+        },
         buttons: {
             acceptButtonOnClick: () => {
-                console.log($('#cosa').value())
-                $('#cosa').value('')
-                dialog.hide()
+                if ($('#Port').value() !== '' && $('#Path').value() !== '') {
+                    $('createHost-Container').appendChild('createHost-Cell', `Port: ${$('#Port').value()}, Path: ${$('#Path').value()}`);
+                    $('#Port').value('');
+                    $('#Path').value('');
+                    dialog.hide();
+                }
             },
             cancelButtonOnClick: () => {
+                //$('#cosa').value('')
                 dialog.hide()
             }
         }
@@ -48,13 +68,10 @@ export function createHost() {
                         <img src="${imgPaht}/add.svg" alt="Add Icon" />
                     </p>
                 </createHost-Cell>
-                <createHost-Cell>
-                    ff
-                </createHost-Cell>
             </createHost-Container>
             <p>Service</p>
             <label>
-                Pror:
+                Port:
                 <input id="port" type="number"><br>
             </label>
         </section>

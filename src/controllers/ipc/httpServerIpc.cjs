@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron/main');
+const { ipcMain } = require('electron');
 const { start, stop } = require('../../http/server.cjs')
 
 function httpServerIpc() {

@@ -1,4 +1,4 @@
-const { ipcMain, nativeTheme } = require('electron/main');
+const { ipcMain, nativeTheme } = require('electron');
 
 function themeModeIpc() {
     ipcMain.handle('dark-mode:toggle', () => {

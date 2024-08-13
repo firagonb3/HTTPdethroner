@@ -1,10 +1,9 @@
-const { app } = require('electron/main');
-const isDev = require('./isDev.cjs');
+const AppPath = require('./AppPath.cjs')
 
 const path = require('node:path');
 const fs = require('node:fs');
 
-let appFile = !isDev ? path.dirname(app.getAppPath(), '..', '..') : app.getAppPath();
+let appFile = AppPath;
 
 const FileDirectoryManager = {
     setPaht: (setPaht) => {
