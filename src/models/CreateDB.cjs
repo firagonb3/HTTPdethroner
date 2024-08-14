@@ -6,7 +6,6 @@ async function CreateDB() {
         const init = await DB.init();
         logHandler.logToRenderer(typeLog.INFO, init)
 
-
         logHandler.logToRenderer(typeLog.INFO, 'Create database.')
         const test = DB.executeQuery(`
             CREATE TABLE IF NOT EXISTS "DetailsRoute" (
