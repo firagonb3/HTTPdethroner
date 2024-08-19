@@ -4,7 +4,7 @@ const { logHandler, typeLog } = require('../controllers/logManagement/logHandler
 async function CreateDB() {
     try {
         const init = await DB.init();
-        logHandler.logToRenderer(typeLog.INFO, init)
+        logHandler.logToRenderer(typeLog.LOG, init)
 
         logHandler.logToRenderer(typeLog.INFO, 'Create database.')
         await DB.executeQuery(`
@@ -21,7 +21,7 @@ async function CreateDB() {
         logHandler.logToRenderer(typeLog.ERROR, error)
     } finally {
         const close = await DB.close();
-        logHandler.logToRenderer(typeLog.INFO, close)
+        logHandler.logToRenderer(typeLog.LOG, close)
     }
 }
 

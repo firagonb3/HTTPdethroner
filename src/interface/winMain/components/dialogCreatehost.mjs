@@ -1,5 +1,6 @@
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 import { dialog } from "../../components/windows/dialog.mjs";
+import createHostCell from "./createHostCell.mjs"
 
 export default function dialogCreatehost() {
     return dialog.create({
@@ -57,7 +58,7 @@ export default function dialogCreatehost() {
 
                     window.DBConnect.addDetailsRouter(addHost);
 
-                    $('createHost-Container').appendChild('createHost-Cell', `Port: ${$('#Port').value()}, Path: ${$('#Path').value()}`);
+                    $('createHost-Container').appendChild('createHost-Cell', createHostCell(Name, Port, Path, 1));
                     $('#Port').value('');
                     $('#Path').value('');
                     $('#Name').value('');

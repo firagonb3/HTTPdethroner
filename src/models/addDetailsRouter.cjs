@@ -5,12 +5,12 @@ async function addDetailsRouter({ Name, Route, Port, IsActive }) {
     try {
         //const { Name, Route, Port, IsActive } = args
         const init = await DB.init();
-        logHandler.logToRenderer(typeLog.INFO, init)
+        logHandler.logToRenderer(typeLog.LOG, init)
 
-        logHandler.logToRenderer(typeLog.LOG, "Name: ", Name)
-        logHandler.logToRenderer(typeLog.LOG, "Route: ", Route)
-        logHandler.logToRenderer(typeLog.LOG, "Port: ", Port)
-        logHandler.logToRenderer(typeLog.LOG, "IsActive: ", IsActive)
+        logHandler.logToRenderer(typeLog.INFO, "Name: ", Name)
+        logHandler.logToRenderer(typeLog.INFO, "Route: ", Route)
+        logHandler.logToRenderer(typeLog.INFO, "Port: ", Port)
+        logHandler.logToRenderer(typeLog.INFO, "IsActive: ", IsActive)
 
         const res = await DB.insert('DetailsRoute', { Name: Name, Route: Route, Port: Port, IsActive: IsActive }).exec()
         logHandler.logToRenderer(typeLog.INFO, "Insert DetailsRoute successful")
@@ -20,7 +20,7 @@ async function addDetailsRouter({ Name, Route, Port, IsActive }) {
         logHandler.logToRenderer(typeLog.ERROR, error)
     } finally {
         const close = await DB.close();
-        logHandler.logToRenderer(typeLog.INFO, close)
+        logHandler.logToRenderer(typeLog.LOG, close)
     }
 }
 

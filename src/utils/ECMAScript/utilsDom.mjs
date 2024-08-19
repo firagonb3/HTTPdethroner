@@ -11,7 +11,7 @@ export function _utilsDom(element) {
         addHTMLContent: (content) => self.e.innerHTML = content,
         appendChild: (tag, content) => {
             const element = document.createElement(tag);
-            element.textContent = content;
+            element.innerHTML = content;
             self.e.appendChild(element);
         },
         onReactiveEvent: (type, func) => {

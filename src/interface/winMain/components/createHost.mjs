@@ -2,15 +2,23 @@ import { globalParams } from "../../../utils/ECMAScript/index.mjs";
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
 import { dialog } from "../../components/windows/dialog.mjs";
-import dialogCreatehost from "./dialogCreatehost.mjs"
+import dialogCreatehost from "./dialogCreatehost.mjs";
+import createHostCell from "./createHostCell.mjs"
 
 export function createHost() {
-    const imgPaht = globalParams('GlobalIMG')
-    const addhost = dialogCreatehost()
+    const imgPaht = globalParams('GlobalIMG');
+    const addhost = dialogCreatehost();
+
+
+    window.DBConnect.selectDetailsRouter().then(res => {
+        res.map(v => {
+                    $('createHost-Container').appendChild('createHost-Cell', createHostCell(v.Name, v.Port, v.Route, v.IsActive));
+        })
+    })
 
     $('#addHost').onReactiveEvent('click', async () => {
-        dialog.show('createHost')
-    })
+        dialog.show('createHost');
+    });
         
     return /*html*/`
         <section class="conten" id="service">
