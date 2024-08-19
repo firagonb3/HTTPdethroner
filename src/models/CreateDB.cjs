@@ -7,7 +7,7 @@ async function CreateDB() {
         logHandler.logToRenderer(typeLog.INFO, init)
 
         logHandler.logToRenderer(typeLog.INFO, 'Create database.')
-        const test = await DB.executeQuery(`
+        await DB.executeQuery(`
             CREATE TABLE IF NOT EXISTS "DetailsRoute" (
                 "ID" INTEGER PRIMARY KEY AUTOINCREMENT,
                 "Name" TEXT NOT NULL UNIQUE,
@@ -16,8 +16,6 @@ async function CreateDB() {
                 "IsActive" BOOLEAN NOT NULL DEFAULT 1
             );
         `);
-
-        console.log(test)
 
     } catch (error) {
         logHandler.logToRenderer(typeLog.ERROR, error)

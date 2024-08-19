@@ -2,58 +2,11 @@ import { globalParams } from "../../../utils/ECMAScript/index.mjs";
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
 import { dialog } from "../../components/windows/dialog.mjs";
+import dialogCreatehost from "./dialogCreatehost.mjs"
 
 export function createHost() {
     const imgPaht = globalParams('GlobalIMG')
-
-    const createhost = dialog.create({
-        id: 'createHost',
-        show: true,
-        elements: /* html */`
-            <form id="elemt-form">
-                <label>
-                    Port:
-                    <input id="Port" type="number"><br>
-                </label>
-                <br>
-                <label>
-                    Path:
-                    <input id="Path" type="text" placeholder="c:\\web\\index.html">
-                </label>
-
-                <button id="selectFile">
-                    search
-                </button>
-            </form>
-
-            <style>
-                #elemt-form {
-                    padding: 20px;
-                }
-            </style>
-        `,
-        preload: () => {
-            $('#selectFile').onReactiveEvent('click', async e => {
-                e.preventDefault();
-                const Path = await window.openFileDialog.selectFileDialog();
-                $('#Path').value(Path);
-            })
-        },
-        buttons: {
-            acceptButtonOnClick: () => {
-                if ($('#Port').value() !== '' && $('#Path').value() !== '') {
-                    $('createHost-Container').appendChild('createHost-Cell', `Port: ${$('#Port').value()}, Path: ${$('#Path').value()}`);
-                    $('#Port').value('');
-                    $('#Path').value('');
-                    dialog.hide();
-                }
-            },
-            cancelButtonOnClick: () => {
-                //$('#cosa').value('')
-                dialog.hide()
-            }
-        }
-    })
+    const addhost = dialogCreatehost()
 
     $('#addHost').onReactiveEvent('click', async () => {
         dialog.show('createHost')
@@ -61,7 +14,7 @@ export function createHost() {
         
     return /*html*/`
         <section class="conten" id="service">
-            ${createhost}
+            ${addhost}
             <createHost-Container>
                 <createHost-Cell>
                     <p id="addHost">

@@ -8,8 +8,12 @@ const windata = require('./windata.cjs');
 const { FileDirectoryManager } = require('./utils/CommonJS/FileDirectoryManager.cjs');
 
 
-const CreateDB = require('./models/CreateDB.cjs')
+const CreateDB = require('./models/CreateDB.cjs');
 
+
+function syncCreateDB() {
+    new Promise(async () => await CreateDB())
+}
 
 app.whenReady().then(() => {
     const date = formatISODateToReadable(new Date().toISOString())
@@ -28,7 +32,7 @@ app.whenReady().then(() => {
     FileDirectoryManager.writeFile(logPath, logFile, date, " - *********************");
     logHandler.init(win[0], logPath, logFile);
     
-    CreateDB();
+    syncCreateDB()
 
     win[0].on('closed', (e) => {
         app.quit();

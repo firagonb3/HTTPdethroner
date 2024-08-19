@@ -27,3 +27,7 @@ contextBridge.exposeInMainWorld('newWindow', {
 contextBridge.exposeInMainWorld('openFileDialog', {
     selectFileDialog: () => ipcRenderer.invoke('openFileDialog:selectFileWeb')
 });
+
+contextBridge.exposeInMainWorld('DBConnect', {
+    addDetailsRouter: (args) => ipcRenderer.invoke('DBConnect:addDetailsRouter', args)
+});
