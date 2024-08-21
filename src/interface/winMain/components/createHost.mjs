@@ -7,12 +7,19 @@ import createHostCell from "./createHostCell.mjs"
 
 export function createHost() {
     const imgPaht = globalParams('GlobalIMG');
-    const addhost = dialogCreatehost();
+    
+
+    const idsAppendChild = {
+        id1: 'createHost-Container',
+        id2: 'createHost-Cell',
+    }
+
+    const addhost = dialogCreatehost(idsAppendChild);
 
 
     window.DBConnect.selectDetailsRouter().then(res => {
         res.map(v => {
-                    $('createHost-Container').appendChild('createHost-Cell', createHostCell(v.Name, v.Port, v.Route, v.IsActive));
+            $(idsAppendChild.id1).appendChild(idsAppendChild.id2, createHostCell(v.Name, v.Port, v.Route, v.IsActive));
         })
     })
 
@@ -41,6 +48,8 @@ export function createHost() {
             createHost-container {
                 display: flex;
                 flex-direction: column;
+                max-height: 300px;
+                overflow-y: scroll;
             }
 
             createHost-Cell img {
