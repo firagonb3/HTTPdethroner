@@ -13,5 +13,5 @@ app.listen(PORT, () => {
     console.log('')
     console.log(textColor(colors.fgGreen, '  IMG loader server'))
     console.log('')
-    console.log(`${textColor(colors.fgGreen, '  ➜ ')}Local:   ${textColor(colors.fgCyan,`http://${HOST}:${PORT}`)}`)
+    console.log(`${textColor(colors.fgGreen, '  ➜ ')} ${textColor(colors.bright, 'Local:')}   ${textColor(colors.fgCyan,`http://${HOST}:${PORT}`)}`)
 });
