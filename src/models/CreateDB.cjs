@@ -8,12 +8,27 @@ async function CreateDB() {
 
         logHandler.logToRenderer(typeLog.INFO, 'Create database.')
         await DB.executeQuery(`
-            CREATE TABLE IF NOT EXISTS "DetailsRoute" (
+            CREATE TABLE IF NOT EXISTS "Hosts" (
                 "ID" INTEGER PRIMARY KEY AUTOINCREMENT,
                 "Name" TEXT NOT NULL UNIQUE,
-                "Route" TEXT NOT NULL,
-                "Port" INTEGER NOT NULL UNIQUE, 
+                "Port" INTEGER NOT NULL UNIQUE,
+                "Path" TEXT NOT NULL,
+                "IndexFile" TEXT,
+                "IndexFilesEnabled" BOOLEAN NOT NULL DEFAULT 1,
                 "IsActive" BOOLEAN NOT NULL DEFAULT 1
+            );
+        `);
+        
+        await DB.executeQuery(`
+            CREATE TABLE IF NOT EXISTS "VirtualHosts" (
+                "ID" INTEGER PRIMARY KEY AUTOINCREMENT,
+                "HostID" INTEGER NOT NULL,
+                "Hostname" TEXT NOT NULL,
+                "Path" TEXT NOT NULL,
+                "IndexFile" TEXT,
+                "IndexFilesEnabled" BOOLEAN NOT NULL DEFAULT 1,
+                "IsActive" BOOLEAN NOT NULL DEFAULT 1,
+                FOREIGN KEY ("HostID") REFERENCES "Hosts"("ID") ON DELETE CASCADE
             );
         `);
 

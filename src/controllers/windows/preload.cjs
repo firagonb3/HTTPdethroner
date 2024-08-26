@@ -29,6 +29,6 @@ contextBridge.exposeInMainWorld('openFileDialog', {
 });
 
 contextBridge.exposeInMainWorld('DBConnect', {
-    addDetailsRouter: (args) => ipcRenderer.invoke('DBConnect:addDetailsRouter', args),
-    selectDetailsRouter: () => ipcRenderer.invoke('DBConnect:selectDetailsRouter')
+    addHost: (args) => ipcRenderer.invoke('DBConnect:addHost', args),
+    selectHosts: () => ipcRenderer.invoke('DBConnect:selectHosts')
 });

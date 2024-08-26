@@ -7,7 +7,6 @@ import createHostCell from "./createHostCell.mjs"
 
 export function createHost() {
     const imgPaht = globalParams('GlobalIMG');
-    
 
     const idsAppendChild = {
         id1: 'createHost-Container',
@@ -16,10 +15,9 @@ export function createHost() {
 
     const addhost = dialogCreatehost(idsAppendChild);
 
-
-    window.DBConnect.selectDetailsRouter().then(res => {
+    window.DBConnect.selectHosts().then(res => {
         res.map(v => {
-            $(idsAppendChild.id1).appendChild(idsAppendChild.id2, createHostCell(v.Name, v.Port, v.Route, v.IsActive));
+            $(idsAppendChild.id1).appendChild(idsAppendChild.id2, createHostCell(v.Name, v.Port, v.Path, v.IsActive));
         })
     })
 

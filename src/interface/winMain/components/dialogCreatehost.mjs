@@ -49,14 +49,12 @@ export default function dialogCreatehost({id1, id2}) {
 
                     const addHost = {
                         Name: Name,
-                        Route: Path,
+                        Path: Path,
                         Port: Port,
                         IsActive: true
                     }
 
-                    console.log(addHost)
-
-                    window.DBConnect.addDetailsRouter(addHost);
+                    window.DBConnect.addHost(addHost);
 
                     $(id1).appendChild(id2, createHostCell(Name, Port, Path, 1));
                     $('#Port').value('');

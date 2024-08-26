@@ -28,6 +28,7 @@ async function startServer(port) {
             logHandler.logToRenderer(typeLog.INFO, `Listening on http://localhost:${port}`);
             isRunning = true;
         });
+        
     } catch (error) {
         logHandler.logToRenderer(typeLog.ERROR, error);
     }

@@ -1,14 +1,14 @@
 const { ipcMain } = require('electron');
-const addDetailsRouter = require('../../models/addDetailsRouter.cjs');
-const selectDetailsRouter = require('../../models/selectDetailsRouter.cjs');
+const addHost = require('../../models/addHost.cjs');
+const selectHosts = require('../../models/selectHosts.cjs');
 
 function DBconnectIPC() {
-    ipcMain.handle('DBConnect:addDetailsRouter', async (e, args) => {
-        await addDetailsRouter(args);
+    ipcMain.handle('DBConnect:addHost', async (e, args) => {
+        await addHost(args);
     });
 
-    ipcMain.handle('DBConnect:selectDetailsRouter', async () => {
-        return selectDetailsRouter()
+    ipcMain.handle('DBConnect:selectHosts', async () => {
+        return selectHosts()
     });
 }
 
