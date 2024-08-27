@@ -11,7 +11,9 @@
     "web": "vite",
     "dev": "concurrently -k \"npm run img\" \"npm run web\" \"npm run start\"",
     "buildWin": "node build-tools/buildElectronApp.cjs --win",
-    "buildLinux": "node build-tools/buildElectronApp.cjs --linux"
+    "buildLinux": "node build-tools/buildElectronApp.cjs --linux",
+    "buildWinForce": "node build-tools/buildElectronApp.cjs --win --force",
+    "buildLinuxForce": "node build-tools/buildElectronApp.cjs --linux --force"
   },
   "devDependencies": {
     "asar": "3.2.0",

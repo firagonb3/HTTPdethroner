@@ -22,6 +22,8 @@ if (args.win) {
   SYSOS = 'win32'; 
 } else if (args.linux) {
   SYSOS = 'linux';
+} else {
+  throw new Error("Invalid operating system specified. Please use --win or --linux.");
 }
 
 const projectRoot = join(__dirname, '..');
@@ -42,9 +44,9 @@ async function buildElectronApp() {
       pathExists(join(__dirname, 'node_modules'))
     ]);
 
-    if (!packageJsonExiste || !nodeModulesExiste) {
+    if (args.force || !packageJsonExiste || !nodeModulesExiste) {
       await installDependencies();
-      await sleep(5000);
+      await sleep(10000);
     }
 
     // Limpiar y asegurar el directorio de salida
