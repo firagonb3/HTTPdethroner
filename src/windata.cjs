@@ -3,7 +3,11 @@ const windata = {
     "winMain": {
         id: "winMain", 
         width: 1000,
-        height: 600,
+        height: 430,
+
+        // width: 410,
+        // height: 430,
+
         loadURL: true,
         loadFile: 'winMain/index.html',
 
@@ -28,17 +32,17 @@ const windata = {
         loadURL: true,
         loadFile: 'winlog/index.html',
 
-        // frame: true,
-        // transparent: false,
-        // maximizable: true,
-        // resizable: true,
-        // devtools: true
+        frame: true,
+        transparent: false,
+        maximizable: true,
+        resizable: true,
+        devtools: true
 
-        frame: false,
-        transparent: true,
-        maximizable: false,
-        resizable: false,
-        devtools: false
+        // frame: false,
+        // transparent: true,
+        // maximizable: false,
+        // resizable: false,
+        // devtools: false
     }
 }
 module.exports = windata;

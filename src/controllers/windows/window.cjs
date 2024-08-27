@@ -41,6 +41,23 @@ function createWindow() {
          });
      });*/
 
+    // win.webContents.on('dom-ready', () => {
+    //     // Ejecutar código JavaScript en la página web cargada para obtener el tamaño del contenido
+    //     win.webContents.executeJavaScript(`
+    //          {
+    //              const appElement = document.getElementById('app');
+    //              const width = appElement.offsetWidth;
+    //              const height = appElement.offsetHeight;
+    //              [width, height];
+    //          }
+    //      `).then(contentSize => {
+    //         // Ajustar el tamaño de la ventana al tamaño del contenido
+    //         win.setContentSize(contentSize[0], contentSize[1]);
+    //     }).catch(error => {
+    //         console.error('Error al obtener el tamaño del contenido HTML:', error);
+    //     });
+    // });
+
     return self
 }
 
@@ -75,6 +92,18 @@ const window = {
         if ((config?.devtools ?? false) && isDev) {
             win.webContents.openDevTools();
         }
+
+        win.webContents.on('dom-ready', () => {
+            const width = config?.width || 800;
+            const height = config?.height || 600;
+            win.webContents.executeJavaScript(`
+                {
+                    const appElement = document.getElementById('app');
+                    appElement.style.width = ${width};
+                    appElement.style.height = ${height};
+                }
+            `)
+        });
 
         //win.id = config?.id || 'main-window';
 

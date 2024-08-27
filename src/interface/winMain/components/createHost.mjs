@@ -1,9 +1,9 @@
 import { globalParams } from "../../../utils/ECMAScript/index.mjs";
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
-import dialog  from "../../components/windows/dialog.mjs";
-import dialogCreatehost from "./dialogCreatehost.mjs";
-import createHostCell from "./createHostCell.mjs"
+import dialog from "../../components/windows/dialog.mjs";
+import dialogCreatehost from "./host/dialogCreatehost.mjs";
+import createHostCell from "./host/createHostCell.mjs"
 
 export function createHost() {
     const imgPaht = globalParams('GlobalIMG');
@@ -24,7 +24,7 @@ export function createHost() {
     $('#addHost').onReactiveEvent('click', async () => {
         dialog().show('createHost');
     });
-        
+
     return /*html*/`
         <section class="conten" id="service">
             ${addhost}
@@ -35,11 +35,6 @@ export function createHost() {
                     </p>
                 </createHost-Cell>
             </createHost-Container>
-            <p>Service</p>
-            <label>
-                Port:
-                <input id="port" type="number"><br>
-            </label>
         </section>
 
         <style>

@@ -1,8 +1,8 @@
-import { $ } from "../../../utils/ECMAScript/index.mjs"
-import dialog from "../../components/windows/dialog.mjs";
+import { $ } from "../../../../utils/ECMAScript/index.mjs"
+import dialog from "../../../components/windows/dialog.mjs";
 import createHostCell from "./createHostCell.mjs"
 
-export default function dialogCreatehost({id1, id2}) {
+export default function dialogCreatehost({ id1, id2 }) {
     const createHost = dialog()
     return createHost.create({
         id: 'createHost',
@@ -61,7 +61,7 @@ export default function dialogCreatehost({id1, id2}) {
                     $('#Port').value('');
                     $('#Path').value('');
                     $('#Name').value('');
-                    dialog.hide();
+                    createHost.hide();
                 }
             },
             cancelButtonOnClick: () => {
