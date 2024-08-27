@@ -1,7 +1,7 @@
 import { globalParams } from "../../../utils/ECMAScript/index.mjs";
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
-import { dialog } from "../../components/windows/dialog.mjs";
+import dialog  from "../../components/windows/dialog.mjs";
 import dialogCreatehost from "./dialogCreatehost.mjs";
 import createHostCell from "./createHostCell.mjs"
 
@@ -22,7 +22,7 @@ export function createHost() {
     })
 
     $('#addHost').onReactiveEvent('click', async () => {
-        dialog.show('createHost');
+        dialog().show('createHost');
     });
         
     return /*html*/`

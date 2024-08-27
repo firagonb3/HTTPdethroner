@@ -1,9 +1,10 @@
 import { $ } from "../../../utils/ECMAScript/index.mjs"
-import { dialog } from "../../components/windows/dialog.mjs";
+import dialog from "../../components/windows/dialog.mjs";
 import createHostCell from "./createHostCell.mjs"
 
 export default function dialogCreatehost({id1, id2}) {
-    return dialog.create({
+    const createHost = dialog()
+    return createHost.create({
         id: 'createHost',
         show: true,
         elements: /* html */`
@@ -65,7 +66,7 @@ export default function dialogCreatehost({id1, id2}) {
             },
             cancelButtonOnClick: () => {
                 //$('#cosa').value('')
-                dialog.hide()
+                createHost.hide()
             }
         }
     })
