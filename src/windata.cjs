@@ -11,6 +11,8 @@ const windata = {
         loadURL: true,
         loadFile: 'winMain/index.html',
 
+        resizableCSS: false,
+
         frame: true,
         transparent: false,
         maximizable: true,
@@ -28,21 +30,23 @@ const windata = {
     "winLog": {
         id: "winLog",
         width: 1000,
-        height: 600,
+        height: 430,
         loadURL: true,
         loadFile: 'winlog/index.html',
 
-        frame: true,
-        transparent: false,
-        maximizable: true,
-        resizable: true,
-        devtools: true
+        resizableCSS: true,
 
-        // frame: false,
-        // transparent: true,
-        // maximizable: false,
-        // resizable: false,
-        // devtools: false
+        // frame: true,
+        // transparent: false,
+        // maximizable: true,
+        // resizable: true,
+        // devtools: true
+
+        frame: false,
+        transparent: true,
+        maximizable: false,
+        resizable: false,
+        devtools: false
     }
 }
 module.exports = windata;
