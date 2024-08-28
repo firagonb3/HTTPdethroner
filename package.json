@@ -29,27 +29,5 @@
     "express": "4.19.2",
     "sqlite3": "5.1.7",
     "vhost": "3.0.2"
-  },
-  "build": {
-    "appId": "com.Firagon.HTTPdethroner",
-    "productName": "HTTPdethroner",
-    "directories": {
-      "output": "dist"
-    },
-    "mac": {
-      "target": "dmg",
-      "artifactName": "${productName}-${version}-mac.zip"
-    },
-    "win": {
-      "target": "portable",
-      "artifactName": "${productName}-${version}-win.zip"
-    },
-    "linux": {
-      "target": "AppImage",
-      "artifactName": "${productName}-${version}-linux.AppImage"
-    },
-    "portable": {
-      "artifactName": "${productName}-${version}-portable.zip"
-    }
   }
 }

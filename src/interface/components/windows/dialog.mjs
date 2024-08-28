@@ -1,32 +1,30 @@
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
-
-
 export default function dialog() {
     return {
         id: '',
         show: function (id = this.id) {document.getElementById(id).show()},
         hide: function (id = this.id) {document.getElementById(id).close()},
         create: function (args = {}) {
-            const { id = rypto.randomUUID(), show = false, elements = '', preload = () => { return }, buttons = {} } = args;
+            const { id = 'a' + crypto.randomUUID().replace(/-/g, ''), show = false, elements = '', preload = () => { return }, buttons = {} } = args;
             const open = show ? 'open' : '';
 
             this.id = id;
             const acceptButtonOnClick = typeof buttons.acceptButtonOnClick === 'function' ? buttons.acceptButtonOnClick : () => { this.hide() }
             const cancelButtonOnClick = typeof buttons.cancelButtonOnClick === 'function' ? buttons.cancelButtonOnClick : () => { this.hide() }
             
-            const acceptButton = 'a' + crypto.randomUUID().replace(/-/g, '')
-            const cancelButton = 'a' + crypto.randomUUID().replace(/-/g, '')
+            const acceptButton = 'b' + crypto.randomUUID().replace(/-/g, '');
+            const cancelButton = 'c' + crypto.randomUUID().replace(/-/g, '');
 
             preload();
 
             $('#' + acceptButton).onReactiveEvent('click', async () => {
-                acceptButtonOnClick()
-            })
+                acceptButtonOnClick();
+            });
 
             $('#' + cancelButton).onReactiveEvent('click', async () => {
-                cancelButtonOnClick()
-            })
+                cancelButtonOnClick();
+            });
 
             return /*html*/`
                 <dialog id='${id}' ${open}>
