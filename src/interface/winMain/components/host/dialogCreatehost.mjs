@@ -33,6 +33,7 @@ export default function dialogCreatehost({ id1, id2 }) {
                         Archivo Index (Opcional):<br>
                         <input id="IndexFileHosts" type="text" name="indexFile" placeholder="index.html">
                         <button id="selectFileHosts" type="button">Buscar Archivo</button>
+                        <button id="HostsSelectFileAndHosts" type="button">Buscar Archivo y Ruta</button>
                     </label>
                 </fieldset>
                 <fieldset>
@@ -111,13 +112,18 @@ export default function dialogCreatehost({ id1, id2 }) {
         preload: () => {
             $('#selectPathHosts').onReactiveEvent('click', async e => {
                 e.preventDefault();
-                const Path = await window.openFileDialog.selectFileDialog();
-                $('#Path').value(Path);
+                $('#PathHosts').value(await window.filePickerDialog.getPathWeb());
             })
             $('#selectFileHosts').onReactiveEvent('click', async e => {
-                e.preventDefault();
-                const Path = await window.openFileDialog.selectFileDialog();
-                $('#Path').value(Path);
+                e.preventDefault()
+                const { fileName } = await window.filePickerDialog.getFileAndPathWeb()
+                $('#IndexFileHosts').value(fileName);
+            })
+            $('#HostsSelectFileAndHosts').onReactiveEvent('click', async e => {
+                e.preventDefault()
+                const { fileName, dirPath } = await window.filePickerDialog.getFileAndPathWeb()
+                $('#PathHosts').value(dirPath);
+                $('#IndexFileHosts').value(fileName);
             })
         },
         buttons: {
@@ -141,7 +147,7 @@ export default function dialogCreatehost({ id1, id2 }) {
 
                     window.DBConnect.addHost(addHost);
 
-                    $(id1).appendChild(id2, createHostCell(NameHost, PortHost, PathHosts, IsActiveHosts));
+                    $(id1).appendChild(id2, createHostCell(addHost));
                     $('#NameHost').value('');
                     $('#PortHost').value('');
                     $('#PathHosts').value('');

@@ -24,8 +24,9 @@ contextBridge.exposeInMainWorld('newWindow', {
     addWin: (arg1, arg2) => ipcRenderer.invoke('newWindow:add', arg1, arg2)
 });
 
-contextBridge.exposeInMainWorld('openFileDialog', {
-    selectFileDialog: () => ipcRenderer.invoke('openFileDialog:selectFileWeb')
+contextBridge.exposeInMainWorld('filePickerDialog', {
+    getFileAndPathWeb: () => ipcRenderer.invoke('filePickerDialog:getFileAndPathWeb'),
+    getPathWeb: () => ipcRenderer.invoke('filePickerDialog:getPathWeb')
 });
 
 contextBridge.exposeInMainWorld('DBConnect', {

@@ -17,8 +17,14 @@ export function createHost() {
 
     window.DBConnect.selectHosts().then(res => {
         res.map(v => {
-            $(idsAppendChild.id1).appendChild(idsAppendChild.id2, createHostCell(v.Name, v.Port, v.Path, v.IsActive));
-        })
+            $(idsAppendChild.id1).appendChild(idsAppendChild.id2, createHostCell({
+                Name: v.Name,
+                Port: v.Port,
+                Path: v.Path,
+                IndexFile: v.IndexFile,
+                IsActive: v.IsActive
+            }));
+        });
     })
 
     $('#addHost').onReactiveEvent('click', async () => {

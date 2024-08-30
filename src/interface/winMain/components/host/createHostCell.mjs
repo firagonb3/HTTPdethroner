@@ -1,4 +1,8 @@
-export default function createHostCell(Name, Port, Route, IsActive) {
+export default function createHostCell({Name, Port, Path, IndexFile, IndexFilesEnabled, IsActive}) {
+
+    if (IndexFile === null) {
+        IndexFile = ''
+    }
 
     if (IsActive === 1) {
         IsActive = 'Active'
@@ -7,7 +11,7 @@ export default function createHostCell(Name, Port, Route, IsActive) {
     return /* html */ `
         <div class="list-item">
             <div class="name">${Name}</div>
-            <div class="details">Port: ${Port}, Route: ${Route}</div>
+            <div class="details">Port: ${Port}, Path: ${Path}\\${IndexFile}</div>
             <div class="status">${IsActive}</div>
         </div>
         <style>
