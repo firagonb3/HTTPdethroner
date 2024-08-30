@@ -1,7 +1,7 @@
 const DB = require('../utils/CommonJS/DB.cjs')
 const { logHandler, typeLog } = require('../controllers/logManagement/logHandler.cjs')
 
-async function addHost({ Name, Path, Port, IsActive }) {
+async function addHost({ Name, Port, Path, IndexFile = null, IndexFilesEnabled, IsActive }) {
     try {
         //const { Name, Route, Port, IsActive } = args
         const init = await DB.init();
@@ -12,7 +12,7 @@ async function addHost({ Name, Path, Port, IsActive }) {
         logHandler.logToRenderer(typeLog.INFO, "Port: ", Port)
         logHandler.logToRenderer(typeLog.INFO, "IsActive: ", IsActive)
 
-        const res = await DB.insert('Hosts', { Name: Name, Path: Path, Port: Port, IsActive: IsActive }).exec()
+        const res = await DB.insert('Hosts', { Name: Name, Path: Path, Port: Port, IndexFile: IndexFile, IndexFilesEnabled: IndexFilesEnabled, IsActive: IsActive }).exec()
         logHandler.logToRenderer(typeLog.INFO, "Insert DetailsRoute successful")
         logHandler.logToRenderer(typeLog.INFO, 'Insert data, changes: ', res.changes, 'lastID: ', res.lastID)
 

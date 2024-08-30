@@ -46,15 +46,18 @@ export default function dialog() {
                         width: 100%;
                         height: calc(100% - 32px);
                         box-sizing: border-box;
+                         overflow: hidden; 
                     }
                     dialog[open] > button {
                         position: absolute;
                         bottom: 10px;
                     }
                     #${acceptButton} {
+                        z-index: 60;
                         right: 10px;
                     }
                     #${cancelButton} {
+                        z-index: 60;
                         right: calc(10px + 80px);
                     }
                 </style>

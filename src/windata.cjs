@@ -3,7 +3,7 @@ const windata = {
     "winMain": {
         id: "winMain", 
         width: 1000,
-        height: 430,
+        height: 500,
 
         // width: 410,
         // height: 430,
