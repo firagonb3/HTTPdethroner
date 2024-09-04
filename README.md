@@ -61,7 +61,7 @@ Para configurar el entorno de desarrollo de HTTPdethroner, siga estos pasos:
 Para iniciar la aplicación en modo desarrollo, ejecute el siguiente comando:
 
 ```bash
-    npm run dev
+  npm run dev
 ```
 
 Esto iniciará un servidor de desarrollo, permitiéndole visualizar la aplicación y realizar cambios en tiempo real
@@ -69,14 +69,14 @@ Esto iniciará un servidor de desarrollo, permitiéndole visualizar la aplicaci�
 ## compilar para produccion 
 Para compilar la aplicación para producción, utilice el comando adecuado según su sistema operativo:
 
-- **En Windows**:
+- **En Linux**:
     ```bash
-    npm run buildWin
+    npm run buildLinux
     ```
 
 - **En Windows**:
     ```bash
-    npm run buildLinux
+    npm run buildWin
     ```
 
 
