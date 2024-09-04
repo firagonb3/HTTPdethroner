@@ -15,12 +15,12 @@ const typeLog = {
 
 function selectType(type) {
     switch (type) {
-        case "ERROR":
-            return { textColor: textColor(colors.fgRed, "ERROR"), text:'ERROR' };
-        case "WARNING":
-            return { textColor: textColor(colors.fgYellow, "WARNING"), text: 'WARNING' };
-        case "INFO":
-            return { textColor: textColor(colors.fgGreen, "INFO"), text: 'INFO' };
+        case typeLog.ERROR:
+            return { textColor: textColor(colors.fgRed, typeLog.ERROR), text: typeLog.ERROR };
+        case typeLog.WARNING:
+            return { textColor: textColor(colors.fgYellow, typeLog.WARNING), text: typeLog.WARNING };
+        case typeLog.INFO:
+            return { textColor: textColor(colors.fgGreen, typeLog.INFO), text: typeLog.INFO };
         default:
             return { textColor: type, text: type };
     }

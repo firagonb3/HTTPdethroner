@@ -18,7 +18,6 @@ function sleep(ms) {
 
 async function detectNodeModulesAndPackage() {
     while (true) {
-        
         try {
             const nodeModulesExists = await pathExists(nodeModulesPath);
             const packageJsonExists = await pathExists(newPackagePath);

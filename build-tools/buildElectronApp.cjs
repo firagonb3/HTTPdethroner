@@ -28,9 +28,10 @@ if (args.win) {
 
 const projectRoot = join(__dirname, '..');
 const { name, version, author } = require(join(projectRoot, 'package.json'));
+const srcDir = join(projectRoot, 'src');
+const outDist = join(projectRoot, 'dist')
 const outDir = join(__dirname, 'build');
 const outDirSrc = join(outDir, 'src');
-const srcDir = join(__dirname, '..', 'src');
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -63,7 +64,7 @@ async function buildElectronApp() {
     // Ejecutar electron-packager
     const appPaths = await packager({
       dir: outDir,
-      out: join(__dirname, '..', 'dist'),
+      out: outDist,
       overwrite: true,
       platform: SYSOS,
       arch: 'x64',
