@@ -6,8 +6,8 @@ contextBridge.exposeInMainWorld('darkMode', {
 })
 
 contextBridge.exposeInMainWorld('HTTPserver', {
-    httpStart: arg1 => ipcRenderer.invoke('http:start', arg1),
-    httpRestart: arg1 => ipcRenderer.invoke('http:restart', arg1),
+    httpStart: () => ipcRenderer.invoke('http:start'),
+    httpRestart: () => ipcRenderer.invoke('http:restart'),
     httpStop: () => ipcRenderer.invoke('http:stop')
 })
 

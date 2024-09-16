@@ -1,34 +1,48 @@
-const express = require('express')
-const vhostServer = require('./vhostServer.cjs')
-const { logHandler, typeLog } = require('../controllers/logManagement/logHandler.cjs')
+const express = require('express');
+const vhost = require('vhost')
+const serveIndex = require('serve-index');
+const path = require('node:path');
 
-const app = express()
-const defaultApp = express()
+const { logHandler, typeLog } = require('../controllers/logManagement/logHandler.cjs');
 
-let server;
+const selectHosts = require('../models/selectHosts.cjs')
+
+let server = [];
 let isRunning = false;
 
-defaultApp.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-async function startServer(port) {
+async function startServer() {
     try {
         if (isRunning) {
             logHandler.logToRenderer(typeLog.WARNING, "The server is already running")
             return;
         }
 
-        vhostServer(app, [
-            { hostname: 'host1.int', text: 'vhost 1' },
-            { hostname: 'host2.int', text: 'vhost 2' }
-        ]);
-        app.use(defaultApp);
-        server = app.listen(port, () => {
-            logHandler.logToRenderer(typeLog.INFO, `Listening on http://localhost:${port}`);
-            isRunning = true;
+        const datahost = await selectHosts();
+        if (Object.keys(datahost).length === 0 === undefined) {
+            logHandler.logToRenderer(typeLog.WARNING, "No data has been provided.");
+            return;
+        }
+
+        datahost.map(v => {
+            logHandler.logToRenderer(typeLog.INFO, v.Path, v.Port);
+            if (!v.Path || !v.Port) throw new Error("path is not defined");
+            if (v.IsActive) {
+                const app = express();
+
+                if (v.index !== null) {
+                    app.get('/', (req, res) => {
+                        res.sendFile(path.join(v.Path, v.index));
+                    });
+                }
+                app.use(express.static(v.Path));
+                if (v.IndexFile) app.use(serveIndex(v.Path, { icons: true }));
+
+                server.push(app.listen(v.Port, () => {
+                    logHandler.logToRenderer(typeLog.INFO, `Server listening on http://localhost:${v.Port}`);
+                }));
+            }
         });
-        
+        isRunning = true;
     } catch (error) {
         logHandler.logToRenderer(typeLog.ERROR, error);
     }
@@ -41,15 +55,15 @@ async function stopServer() {
             return;
         }
 
-        server.close(() => {
-            console.log();
-            logHandler.logToRenderer(typeLog.INFO, "The server has been stopped");
-            isRunning = false;
+        logHandler.logToRenderer(typeLog.INFO, "The server has been stopped");
+        server.map(v => {
+            v.close();
         });
+        server = [];
+        isRunning = false;
     } catch (error) {
         logHandler.logToRenderer(typeLog.ERROR, error);
     }
-    
 }
 
 

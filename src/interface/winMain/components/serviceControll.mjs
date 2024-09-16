@@ -4,8 +4,7 @@ export function serviceControll() {
 
     $('#httpStart').onReactiveEvent('click', async () => {
         console.log()
-        const port = $('#port').value() || 3000
-        await window.HTTPserver.httpStart(port)
+        await window.HTTPserver.httpStart()
     })
 
     $('#httpStop').onReactiveEvent('click', async () => {
@@ -13,8 +12,7 @@ export function serviceControll() {
     })
 
     $('#httpRestart').onReactiveEvent('click', async () => {
-        const port = $('#port').value() || 3000
-        await window.HTTPserver.httpRestart(port)
+        await window.HTTPserver.httpRestart()
     })
 
     $('#log-win').onReactiveEvent('click', async () => {
