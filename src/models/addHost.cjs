@@ -3,7 +3,9 @@ const { logHandler, typeLog } = require('../controllers/logManagement/logHandler
 
 async function addHost({ Name, Port, Path, IndexFile = null, IndexFilesEnabled, IsActive }) {
     try {
-        //const { Name, Route, Port, IsActive } = args
+
+        if (IndexFile === '') IndexFile = null;
+        
         const init = await DB.init();
         logHandler.logToRenderer(typeLog.LOG, init)
 
