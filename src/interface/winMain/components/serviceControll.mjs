@@ -76,7 +76,6 @@ export function serviceControll() {
             }
 
             serviceControll-Box {
-                user-select: text;
                 display: block;
                 width: 100%;
                 height: 10rem;
@@ -85,6 +84,10 @@ export function serviceControll() {
                 padding: .5em;
                 overflow: hidden;
                 box-sizing: border-box;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
             }
         </style>
     `
