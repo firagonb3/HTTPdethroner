@@ -14,10 +14,12 @@ async function selectHosts() {
             res.forEach((v) => {
                 logHandler.logToRenderer(
                     typeLog.INFO, '\n',
-                    '                      ID: ', v.ID, '\n',
                     '                      Name: ', v.Name, '\n',
                     '                      Port: ', v.Port, '\n',
-                    '                      Path: ', v.Path, '\n'
+                    '                      Path: ', v.Path, '\n',
+                    '                      IndexFile: ', v.IndexFile, '\n',
+                    '                      IndexFilesEnabled: ', v.IndexFilesEnabled, '\n',
+                    '                      IsActive: ', v.IsActive, '\n'
                 );
             });
         } else {
