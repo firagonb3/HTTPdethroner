@@ -29,13 +29,29 @@ async function startServer() {
             if (v.IsActive) {
                 const app = express();
 
-                if (v.index !== null) {
-                    app.get('/', (req, res) => {
-                        res.sendFile(path.join(v.Path, v.index));
+                if (v.IndexFile !== null) {
+                    app.get('/', (req, res, next) => {
+                        res.sendFile(path.join(v.Path, v.IndexFile), (err) => {
+                            if(err) {
+                                logHandler.logToRenderer(typeLog.ERROR, err);
+                                next(err);
+                            }
+                        });
                     });
                 }
+
                 app.use(express.static(v.Path));
-                if (v.IndexFile) app.use(serveIndex(v.Path, { icons: true }));
+                if (v.IndexFilesEnabled) app.use(serveIndex(v.Path, { icons: true }));
+
+                app.use((err, req, res) => {
+                    if (err.code === 'ENOENT') {
+                        logHandler.logToRenderer(typeLog.ERROR, 'File not found');
+                        res.status(404).send('File not found');
+                    } else {
+                        logHandler.logToRenderer(typeLog.ERROR, 'Internal server error');
+                        res.status(500).send('Internal server error');
+                    }
+                });
 
                 server.push(app.listen(v.Port, () => {
                     logHandler.logToRenderer(typeLog.INFO, `Server listening on http://localhost:${v.Port}`);
