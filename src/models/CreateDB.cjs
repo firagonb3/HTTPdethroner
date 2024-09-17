@@ -11,7 +11,6 @@ async function CreateDB() {
             CREATE TABLE IF NOT EXISTS "Hosts" (
                 "Name" TEXT NOT NULL UNIQUE,
                 "Port" INTEGER NOT NULL PRIMARY KEY, 
-                "index" TEXT DEFAULT NULL,
                 "Path" TEXT NOT NULL,
                 "IndexFile" TEXT,
                 "IndexFilesEnabled" BOOLEAN NOT NULL DEFAULT 1,
@@ -23,7 +22,6 @@ async function CreateDB() {
             CREATE TABLE IF NOT EXISTS "VirtualHosts" (
                 "Port" INTEGER NOT NULL,
                 "Hostname" TEXT NOT NULL,
-                "index" TEXT DEFAULT NULL,
                 "Path" TEXT NOT NULL,
                 "IndexFile" TEXT,
                 "IndexFilesEnabled" BOOLEAN NOT NULL DEFAULT 1,
