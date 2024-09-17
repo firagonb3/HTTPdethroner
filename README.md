@@ -79,5 +79,24 @@ Para compilar la aplicación para producción, utilice el comando adecuado segú
     npm run buildWin
     ```
 
+## Configuración Obligatoria de Git para Manejo de Finales de Línea
 
+Para garantizar que los finales de línea se manejen correctamente y evitar problemas con la integridad de los archivos, **es obligatorio configurar Git** según el sistema operativo que estés utilizando. Realiza las siguientes configuraciones en tu entorno local:
 
+- **En Windows**, ejecuta el siguiente comando en tu terminal:
+
+  ```bash
+  git config --global core.autocrlf true
+  ```
+
+Esto asegura que Git convierta los finales de línea de `LF` a `CRLF` cuando extraigas archivos, y de `CRLF` a `LF` al hacer commits.
+
+- **En Linux**, puedes configurar Git para que no haga conversiones automáticas de finales de línea, ya que se está utilizando un archivo `.gitattributes` para gestionar los finales de línea:
+
+  ```bash
+  git config --global core.autocrlf false
+  ```
+
+El archivo `.gitattributes` definirá cómo Git maneja los finales de línea al hacer commits y al extraer archivos, asegurando la coherencia entre sistemas operativos.
+
+**Es esencial que completes esta configuración para todos los colaboradores del proyecto.** De lo contrario, podrías enfrentar inconsistencias en los finales de línea, lo que podría romper los archivos y complicar la colaboración.

@@ -10,22 +10,6 @@ const selectHosts = require('../models/selectHosts.cjs')
 let server = [];
 let isRunning = false;
 
-function setupServer(v) {
-    logHandler.logToRenderer(typeLog.INFO, v.Path, v.Port);
-
-    if (v.IsActive) {
-        const app = express();
-
-        setupRoutes(app, v);
-        setupStaticFiles(app, v);
-        setupErrorHandling(app);
-
-        server.push(app.listen(v.Port, () => {
-            logHandler.logToRenderer(typeLog.INFO, `Server listening on http://localhost:${v.Port}`);
-        }));
-    }
-}
-
 function setupRoutes(app, v) {
     if (v.IndexFile !== null) {
         app.get('/', (req, res, next) => {
@@ -56,6 +40,22 @@ function setupErrorHandling(app) {
             res.status(500).send('Internal server error');
         }
     });
+}
+
+function setupServer(v) {
+    logHandler.logToRenderer(typeLog.INFO, v.Path, v.Port);
+
+    if (v.IsActive) {
+        const app = express();
+
+        setupRoutes(app, v);
+        setupStaticFiles(app, v);
+        setupErrorHandling(app);
+
+        server.push(app.listen(v.Port, () => {
+            logHandler.logToRenderer(typeLog.INFO, `Server listening on http://localhost:${v.Port}`);
+        }));
+    }
 }
 
 function isValidHostData(datahost) {
