@@ -1,4 +1,5 @@
 require('dotenv').config();
+const serveIndex = require('serve-index');
 const { textColor, colors } = require('./src/utils/CommonJS/textColor.cjs');
 
 const express = require('express');
@@ -7,6 +8,8 @@ const app = express();
 const PORT = parseInt(process.env.PORT_IMG, 10);
 const HOST = process.env.HOST_IMG
 
+
+app.use(serveIndex(path.join(__dirname, '/src/img'), { icons: true }));
 app.use('/', express.static(path.join(__dirname, '/src/img')));
 
 app.listen(PORT, () => {
