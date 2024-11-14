@@ -31,5 +31,8 @@ contextBridge.exposeInMainWorld('filePickerDialog', {
 
 contextBridge.exposeInMainWorld('DBConnect', {
     addHost: (args) => ipcRenderer.invoke('DBConnect:addHost', args),
-    selectHosts: () => ipcRenderer.invoke('DBConnect:selectHosts')
+    selectHostsAll: () => ipcRenderer.invoke('DBConnect:selectHostsAll'),
+    selectHostsPort: (args) => ipcRenderer.invoke('DBConnect:selectHostsPort', args),
+    updateHostPort: (args) => ipcRenderer.invoke('DBConnect:UpdateHostPort', args),
+    deleteHostPort: (args) => ipcRenderer.invoke('DBConnect:DeleteHostsPort', args)
 });

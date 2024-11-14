@@ -5,7 +5,7 @@ const path = require('node:path');
 
 const { logHandler, typeLog } = require('../controllers/logManagement/logHandler.cjs');
 
-const selectHosts = require('../models/selectHosts.cjs')
+const { selectHostsAll } = require('../models/selectHosts.cjs')
 
 let server = [];
 let isRunning = false;
@@ -69,7 +69,7 @@ async function startServer() {
             return;
         }
 
-        const datahost = await selectHosts();
+        const datahost = await selectHostsAll();
         if (!isValidHostData(datahost)) {
             logHandler.logToRenderer(typeLog.WARNING, "No valid data has been provided.");
             return;

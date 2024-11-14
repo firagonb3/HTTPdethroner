@@ -1,4 +1,10 @@
+import { globalParams } from "../../../../utils/ECMAScript/index.mjs";
+import { dialogEdithostShow } from "./dialogCreateAndEdithost.mjs";
+import { $ } from "../../../../utils/ECMAScript/index.mjs"
+
+
 export default function createHostCell({Name, Port, Path, IndexFile, IndexFilesEnabled, IsActive}) {
+    const imgPaht = globalParams('GlobalIMG');
 
     if (IndexFile === null) {
         IndexFile = ''
@@ -8,11 +14,24 @@ export default function createHostCell({Name, Port, Path, IndexFile, IndexFilesE
         IsActive = 'Active'
     }
 
+    $(`button[data-edit=P${Port}]`).onReactiveEvent('click', async () => {
+        dialogEdithostShow(Port);
+    });
+
+    $(`button[data-delete=P${Port}]`).onReactiveEvent('click', async () => {
+        window.DBConnect.deleteHostPort(Port);
+        const portDiv = document.querySelector(`div[data-port='P${Port}']`);
+        portDiv.parentElement.remove();
+        console.log('delete', Port)
+    });
+
     return /* html */ `
-        <div class="list-item">
+        <div class="list-item" data-port='P${Port}'>
             <div class="name">${Name}</div>
             <div class="details">Port: ${Port}, Path: ${Path}\\${IndexFile}</div>
             <div class="status">${IsActive}</div>
+            <button data-edit="P${Port}"><img src="${imgPaht}/edit.svg" alt="Edit Icon" /></button>
+            <button data-delete="P${Port}"><img src="${imgPaht}/delete.svg" alt="Edit Icon" /></button>
         </div>
         <style>
             createHost-Cell > .list-item {

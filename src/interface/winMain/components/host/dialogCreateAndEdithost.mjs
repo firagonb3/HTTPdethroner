@@ -1,12 +1,46 @@
+
 import { $ } from "../../../../utils/ECMAScript/index.mjs"
 import dialog from "../../../components/windows/dialog.mjs";
 import createHostCell from "./createHostCell.mjs"
 
-export default function dialogCreatehost({ id1, id2 }) {
-    const createHost = dialog()
-    return createHost.create({
-        id: 'createHost',
-        show: true,
+const createAndEditHost = dialog()
+let PORT = null
+
+
+export function dialogCreateShow() {
+    PORT = null
+    $('#NameHost').value('');
+    $('#PortHost').value('');
+    $('#PathHosts').value('');
+    $('#IndexFileHosts').value('');
+    $('#IndexFilesEnabledHosts').checked(false);
+    $('#IsActiveHosts').checked(true);
+    createAndEditHost.show();
+}
+
+export function dialogEdithostShow(port) {
+    PORT = port;
+    createAndEditHost.beforShow(() => {
+        window.DBConnect.selectHostsPort(port).then(res => {
+            const data = res[0];
+            $('#NameHost').value(data.Name);
+            $('#PortHost').value(data.Port);
+            $('#PathHosts').value(data.Path);
+            $('#IndexFileHosts').value(data.IndexFile);
+            $('#IndexFilesEnabledHosts').checked(Boolean(data.IndexFilesEnabled));
+            $('#IsActiveHosts').checked(Boolean(data.IsActive));
+        });
+    });
+    createAndEditHost.show();
+}
+
+export function dialogCreatehost({ id1, id2 }) {
+    return createAndEditHost.create(CreateTemplate({ id1: id1, id2: id2 }))
+}
+
+function CreateTemplate({ id1 = null, id2 = null }) {
+    return {
+        show: false,
         elements: /* html */`
             <form id="elemt-form">
                 <fieldset>
@@ -61,7 +95,6 @@ export default function dialogCreatehost({ id1, id2 }) {
                     fieldset {
                         border: 1px solid #ddd;
                         border-radius: 8px;
-                      
                         margin-bottom: 20px;
                         background-color: grey;
                     }
@@ -128,14 +161,15 @@ export default function dialogCreatehost({ id1, id2 }) {
         },
         buttons: {
             acceptButtonOnClick: () => {
-                if ($('#PortHost').value() !== '' && $('#PortHost').value() !== '') {
-                    const NameHost = $('#NameHost').value();
-                    const PortHost = $('#PortHost').value();
-                    const PathHosts = $('#PathHosts').value();
-                    const IndexFileHosts = $('#IndexFileHosts').value();
-                    const IndexFilesEnabledHosts = $('#IndexFilesEnabledHosts').checked();
-                    const IsActiveHosts = $('#IsActiveHosts').checked();
 
+                const NameHost = $('#NameHost').value();
+                const PortHost = $('#PortHost').value();
+                const PathHosts = $('#PathHosts').value();
+                const IndexFileHosts = $('#IndexFileHosts').value();
+                const IndexFilesEnabledHosts = $('#IndexFilesEnabledHosts').checked();
+                const IsActiveHosts = $('#IsActiveHosts').checked();
+
+                if (NameHost !== '' && PortHost !== '' && PathHosts !== '' && IndexFileHosts !== '' && IndexFilesEnabledHosts !== null && IsActiveHosts !== null) {
                     const addHost = {
                         Name: NameHost,
                         Port: PortHost,
@@ -145,22 +179,23 @@ export default function dialogCreatehost({ id1, id2 }) {
                         IsActive: IsActiveHosts
                     }
 
-                    window.DBConnect.addHost(addHost);
-
-                    $(id1).appendChild(id2, createHostCell(addHost));
-                    $('#NameHost').value('');
-                    $('#PortHost').value('');
-                    $('#PathHosts').value('');
-                    $('#IndexFileHosts').value('');
-                    $('#IndexFilesEnabledHosts').value('');
-                    $('#IsActiveHosts').value('');
-                    createHost.hide();
+                    if (PORT === null) {
+                        window.DBConnect.addHost(addHost);
+                        $(id1).appendChild(id2, createHostCell(addHost));
+                    } else {
+                        window.DBConnect.updateHostPort(addHost);
+                        const cells = document.querySelectorAll('createhost-cell');
+                        cells.forEach(cell => {
+                            console.log(cell)
+                            if (cell.querySelector(`div[data-port=P${PORT}]`)) {
+                                cell.remove();
+                                $(id2).addHTMLContent(createHostCell(addHost))
+                            }
+                        })
+                    }
+                    createAndEditHost.hide();
                 }
-            },
-            cancelButtonOnClick: () => {
-                //$('#cosa').value('')
-                createHost.hide()
             }
         }
-    })
+    }
 }

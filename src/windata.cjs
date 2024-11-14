@@ -11,19 +11,19 @@ const windata = {
         loadURL: true,
         loadFile: 'winMain/index.html',
 
-        resizableCSS: true,
+        resizableCSS: false,
 
-        // frame: true,
-        // transparent: false,
-        // maximizable: true,
-        // resizable: true,
-        // devtools: true
+        frame: true,
+        transparent: false,
+        maximizable: true,
+        resizable: true,
+        devtools: true
 
-        frame: false,
-        transparent: true,
-        maximizable: false,
-        resizable: false,
-        devtools: false
+        // frame: false,
+        // transparent: true,
+        // maximizable: false,
+        // resizable: false,
+        // devtools: false
 
 
     },

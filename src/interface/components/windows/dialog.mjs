@@ -1,20 +1,25 @@
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
 export default function dialog() {
+    const a = 'a' + crypto.randomUUID().replace(/-/g, '')
+    const b = 'a' + crypto.randomUUID().replace(/-/g, '')
+    const c = 'a' + crypto.randomUUID().replace(/-/g, '')
+
     return {
         id: '',
-        show: function (id = this.id) {document.getElementById(id).show()},
-        hide: function (id = this.id) {document.getElementById(id).close()},
+        beforShow: function (func = null) { if (typeof func === 'function') func(); },
+        show: function (id = this.id) { this.beforShow(); document.getElementById(id).show() },
+        hide: function (id = this.id) { document.getElementById(id).close() },
         create: function (args = {}) {
-            const { id = 'a' + crypto.randomUUID().replace(/-/g, ''), show = false, elements = '', preload = () => { return }, buttons = {} } = args;
+            const { id = a, show = false, elements = '', preload = () => { return }, buttons = {} } = args;
             const open = show ? 'open' : '';
 
             this.id = id;
             const acceptButtonOnClick = typeof buttons.acceptButtonOnClick === 'function' ? buttons.acceptButtonOnClick : () => { this.hide() }
             const cancelButtonOnClick = typeof buttons.cancelButtonOnClick === 'function' ? buttons.cancelButtonOnClick : () => { this.hide() }
             
-            const acceptButton = 'b' + crypto.randomUUID().replace(/-/g, '');
-            const cancelButton = 'c' + crypto.randomUUID().replace(/-/g, '');
+            const acceptButton = b;
+            const cancelButton = c;
 
             preload();
 
@@ -46,7 +51,7 @@ export default function dialog() {
                         width: 100%;
                         height: calc(100% - 32px);
                         box-sizing: border-box;
-                         overflow: hidden; 
+                        overflow: hidden; 
                     }
                     dialog[open] > button {
                         position: absolute;

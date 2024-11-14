@@ -1,8 +1,7 @@
 import { globalParams } from "../../../utils/ECMAScript/index.mjs";
 import { $ } from "../../../utils/ECMAScript/index.mjs"
 
-import dialog from "../../components/windows/dialog.mjs";
-import dialogCreatehost from "./host/dialogCreatehost.mjs";
+import { dialogCreateShow, dialogCreatehost } from "./host/dialogCreateAndEdithost.mjs";
 import createHostCell from "./host/createHostCell.mjs"
 
 export function createHost() {
@@ -13,10 +12,8 @@ export function createHost() {
         id2: 'createHost-Cell',
     }
 
-    const addhost = dialogCreatehost(idsAppendChild);
-
-    window.DBConnect.selectHosts().then(res => {
-        res.map(v => {
+    window.DBConnect.selectHostsAll().then(res => {
+        res.forEach(v => {
             $(idsAppendChild.id1).appendChild(idsAppendChild.id2, createHostCell({
                 Name: v.Name,
                 Port: v.Port,
@@ -28,12 +25,12 @@ export function createHost() {
     })
 
     $('#addHost').onReactiveEvent('click', async () => {
-        dialog().show('createHost');
+        dialogCreateShow()
     });
 
     return /*html*/`
+        ${dialogCreatehost(idsAppendChild)}
         <section class="conten" id="service">
-            ${addhost}
             <createHost-Container>
                 <createHost-Cell>
                     <p id="addHost">
